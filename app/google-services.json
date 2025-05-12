@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "774406879833",
+    "project_id": "deephire-android",
+    "storage_bucket": "deephire-android.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:774406879833:android:823804f01b1f5fdc5a8f48",
+        "android_client_info": {
+          "package_name": "com.example.deephire_android"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWLdSQ5aG0R4a4EpfGzHh66CsbllvrcnQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
