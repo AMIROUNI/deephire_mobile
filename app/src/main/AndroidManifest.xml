@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Deephire_android"
         tools:targetApi="31">
         <activity
+            android:name=".Activities.CompliteProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".Activities.AdminActivity"
             android:exported="false" />
         <activity

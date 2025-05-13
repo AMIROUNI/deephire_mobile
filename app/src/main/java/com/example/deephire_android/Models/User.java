@@ -17,6 +17,8 @@ public class User {
 
     private boolean isBanned ;
 
+    private boolean isFirstLogin;
+
     public User(String fullName, String email, String password, String role, boolean isBanned ) {
         this.fullName = fullName;
         this.email = email;
