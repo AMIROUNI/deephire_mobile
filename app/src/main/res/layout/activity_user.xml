@@ -6,32 +6,59 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.UserActivity"
-    tools:ignore="ExtraText">
+    android:background="@color/dark_background"
+    tools:context=".Activities.UserActivity">
 
-    <androidx.appcompat.widget.Toolbar
+    <!-- DeepHire Toolbar -->
+    <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
-        android:layout_height="74dp"
-        android:layout_marginTop="16dp"
-        android:background="@color/purple_500"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/dark_surface"
         android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="DeepHire" />
+        app:title="DeepHire"
+        app:titleTextColor="@color/deephire_blue" />
 
-    <TextView
-        android:id="@+id/tvEmail"
+    <!-- User Profile Chip -->
+    <com.google.android.material.chip.Chip
+        android:id="@+id/chipProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
         android:text="user@example.com"
-        android:textSize="18sp"
+        android:textColor="@color/white"
+        app:chipBackgroundColor="@color/dark_surface_variant"
+        app:chipIcon="@drawable/ic_profile"
+        app:chipIconTint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"/>
+
+    <!-- Job Listings RecyclerView -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/chipProfile"/>
+
+    <!-- ProgressBar for Loading -->
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

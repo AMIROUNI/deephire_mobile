@@ -109,6 +109,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             String selectedRole = ((android.widget.RadioButton) findViewById(selectedId)).getText().toString();
             User user = new User(fullName, email, password, selectedRole, false);
+            user.setFirstLogin(true);
             Map<String, Object> userData = convertUserToMap(user);
 
             // Check if email is already used

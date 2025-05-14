@@ -3,4 +3,23 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="purple_500">#6200EE</color>
+    <color name="chip_background">#FF6200EE</color>
+    <color name="purple_700">#3700B3</color>
+    <color name="light_gray_background">#F0F0F0</color>
+    <!-- Dark Mode Colors -->
+    <color name="dark_background">#121212</color>
+    <color name="dark_surface">#1E1E1E</color>
+    <color name="dark_surface_variant">#252525</color>
+    <color name="linkedin_blue">#0A66C2</color>
+    <color name="gray_400">#B3B3B3</color>
+    <color name="gray_500">#808080</color>
+    <color name="gray_600">#666666</color>
+
+    <!-- Circle Background for Logos -->
+    <color name="circle_background_color">#333333</color>
+
+
+    <color name="deephire_blue">#6200EE</color> <!-- DeepHire brand color -->
+
+
 </resources>

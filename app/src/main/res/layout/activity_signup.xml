@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:buttonTint="#0077B5"
-            android:text="Employer"
+            android:text="Admin Company"
             android:textColor="#333333" />
     </RadioGroup>
 

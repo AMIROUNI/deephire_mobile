@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,11 +18,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class SigInActivity extends AppCompatActivity {
 
-    EditText etEmail;
-    EditText etPassword;
-    Button btnSignIn;
-
-    FirebaseFirestore db;
+    private static final String TAG = "SigInActivity";
+    private EditText etEmail;
+    private EditText etPassword;
+    private Button btnSignIn;
+    private FirebaseFirestore db;
+    private AlertDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,94 +31,96 @@ public class SigInActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_sigin);
 
-        this.etEmail = findViewById(R.id.etEmail);
-        this.etPassword = findViewById(R.id.etPassword);
-        this.btnSignIn = findViewById(R.id.btnSignIn);
+        etEmail = findViewById(R.id.etEmail);
+        etPassword = findViewById(R.id.etPassword);
+        btnSignIn = findViewById(R.id.btnSignIn);
         db = FirebaseFirestore.getInstance();
+
+        // Initialize progress dialog
+        progressDialog = new AlertDialog.Builder(this)
+                .setView(R.layout.dialog_progress)
+                .setCancelable(false)
+                .create();
 
         Intent intent = getIntent();
         String email = intent.getStringExtra("email");
-
         if (email != null) {
             etEmail.setText(email);
         }
 
-        btnSignIn.setOnClickListener(v -> sigIn(v));
+        btnSignIn.setOnClickListener(this::sigIn);
     }
 
     public void sigIn(View view) {
         String email = etEmail.getText().toString().trim();
         String password = etPassword.getText().toString().trim();
 
-        if (email.isEmpty() && password.isEmpty()) {
-            AlertDialog alertDialog = new AlertDialog.Builder(this).create();
-            alertDialog.setTitle("Attention!");
-            alertDialog.setMessage("All inputs are required.");
-            alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (dialog, which) -> dialog.dismiss());
-            alertDialog.show();
-        } else {
-            boolean isValid = true;
+        Log.d(TAG, "sigIn: Attempting login with email: " + email);
 
-            if (email.isEmpty()) {
-                etEmail.setError("Email is required");
-                isValid = false;
-            } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-                etEmail.setError("Invalid email format");
-                isValid = false;
-            }
+        boolean isValid = true;
 
-            if (password.isEmpty()) {
-                etPassword.setError("Password is required");
-                isValid = false;
-            } else if (password.length() < 6) {
-                etPassword.setError("Password must be at least 6 characters");
-                isValid = false;
-            }
-
-            if (!isValid) return;
-
-            // Check Firestore for matching user
-            db.collection("users")
-                    .whereEqualTo("email", email)
-                    .get()
-                    .addOnSuccessListener(queryDocumentSnapshots -> {
-                        if (queryDocumentSnapshots.isEmpty()) {
-                            Toast.makeText(this, "No user found with this email.", Toast.LENGTH_LONG).show();
-                        } else {
-                            boolean match = false;
-
-                            for (var doc : queryDocumentSnapshots) {
-                                String dbPassword = doc.getString("password");
-                                String role = doc.getString("role");
-
-                                if (dbPassword != null && dbPassword.equals(password)) {
-                                    match = true;
-
-                                    Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
-
-                                    // Redirect user based on role
-                                    redirectByRole(role,email);
-                                }
-                            }
-
-                            if (!match) {
-                                Toast.makeText(this, "Incorrect password.", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    })
-                    .addOnFailureListener(e -> {
-                        Toast.makeText(this, "Login error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-                    });
+        if (email.isEmpty()) {
+            etEmail.setError("Email is required");
+            isValid = false;
+        } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            etEmail.setError("Invalid email format");
+            isValid = false;
         }
+
+        if (password.isEmpty()) {
+            etPassword.setError("Password is required");
+            isValid = false;
+        } else if (password.length() < 6) {
+            etPassword.setError("Password must be at least 6 characters");
+            isValid = false;
+        }
+
+        if (!isValid) {
+            showAlert("Attention!", "Please fill in all required fields correctly.");
+            return;
+        }
+
+        progressDialog.show();
+
+        // Check Firestore for matching user
+        db.collection("users")
+                .whereEqualTo("email", email)
+                .limit(1)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    progressDialog.dismiss();
+                    if (queryDocumentSnapshots.isEmpty()) {
+                        Log.d(TAG, "sigIn: No user found for email: " + email);
+                        Toast.makeText(this, "No user found with this email.", Toast.LENGTH_LONG).show();
+                    } else {
+                        var doc = queryDocumentSnapshots.getDocuments().get(0);
+                        String dbPassword = doc.getString("password");
+                        String role = doc.getString("role");
+
+                        Log.d(TAG, "sigIn: User found, role: " + role);
+
+                        if (dbPassword != null && dbPassword.equals(password)) {
+                            Toast.makeText(this, "Login successful!", Toast.LENGTH_SHORT).show();
+                            redirectByRole(role, email);
+                        } else {
+                            Log.d(TAG, "sigIn: Incorrect password for email: " + email);
+                            Toast.makeText(this, "Incorrect password.", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    progressDialog.dismiss();
+                    Log.e(TAG, "sigIn: Error fetching user: " + e.getMessage(), e);
+                    showAlert("Error", "Login failed. Please try again.");
+                });
     }
 
-    public void redirectByRole(String role,String email) {
+    public void redirectByRole(String role, String email) {
         Intent intent;
-
-        // Redirect user based on role
+        Log.d(TAG, "redirectByRole: Redirecting user with role: " + role + ", email: " + email);
         switch (role) {
             case "Admin Company":
-                intent = new Intent(this, AdminCompanyActivity.class);
+                intent = new Intent(this, CompliteProfileActivity.class);
                 break;
             case "Admin":
                 intent = new Intent(this, AdminActivity.class);
@@ -125,8 +129,16 @@ public class SigInActivity extends AppCompatActivity {
                 intent = new Intent(this, UserActivity.class);
         }
 
-        intent.putExtra("email",email);
+        intent.putExtra("email", email);
         startActivity(intent);
-        finish(); // Close the current activity (login screen)
+        finish();
+    }
+
+    private void showAlert(String title, String message) {
+        AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(message);
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", (dialog, which) -> dialog.dismiss());
+        alertDialog.show();
     }
 }
