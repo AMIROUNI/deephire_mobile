@@ -126,7 +126,7 @@ public class SigInActivity extends AppCompatActivity {
                 intent = new Intent(this, AdminActivity.class);
                 break;
             default:
-                intent = new Intent(this, UserActivity.class);
+                intent = new Intent(this, ProfileActivity.class);
         }
 
         intent.putExtra("email", email);
