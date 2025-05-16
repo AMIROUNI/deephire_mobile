@@ -3,10 +3,13 @@ package com.example.deephire_android.Models;
 import androidx.annotation.NonNull;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class Profile {
@@ -52,6 +55,11 @@ public class Profile {
         void onProfileNotFound();
         void onError(Exception e);
         void onProfileAdded(Profile profile);
+    }
+
+    public interface AllProfilesCallback {
+        void onProfilesLoaded(List<Profile> profiles);
+        void onError(Exception e);
     }
 
     public static void addProfile(Profile profile, @NonNull ProfileCallback callback) {
@@ -110,6 +118,23 @@ public class Profile {
                 .document(profile.getEmail())
                 .set(profile.toMap())
                 .addOnSuccessListener(aVoid -> callback.onProfileFound(profile))
+                .addOnFailureListener(e -> callback.onError(e));
+    }
+
+    public static void getAllProfiles(@NonNull AllProfilesCallback callback) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("profiles")
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    List<Profile> profiles = new ArrayList<>();
+                    for (var doc : queryDocumentSnapshots) {
+                        Profile profile = doc.toObject(Profile.class);
+                        if (profile != null) {
+                            profiles.add(profile);
+                        }
+                    }
+                    callback.onProfilesLoaded(profiles);
+                })
                 .addOnFailureListener(e -> callback.onError(e));
     }
 }

@@ -14,6 +14,7 @@
     <color name="gray_400">#B3B3B3</color>
     <color name="gray_500">#808080</color>
     <color name="gray_600">#666666</color>
+    <color name="gray">#B0B0B0</color>
 
     <!-- Circle Background for Logos -->
     <color name="circle_background_color">#333333</color>

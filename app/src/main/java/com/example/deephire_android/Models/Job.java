@@ -1,9 +1,10 @@
 package com.example.deephire_android.Models;
 
+
 public class Job {
     private String id;
     private String title;
-    private String location;
+    private Location location;
     private String formatted_relative_time;
     private String link;
     private String locality;
@@ -12,7 +13,7 @@ public class Job {
     public Job() {}
 
     // Constructor for mapping Adzuna data
-    public Job(String id, String title, String location, String formatted_relative_time, String link, String locality) {
+    public Job(String id, String title, Location location, String formatted_relative_time, String link, String locality) {
         this.id = id;
         this.title = title;
         this.location = location;
@@ -30,8 +31,12 @@ public class Job {
         return title;
     }
 
-    public String getLocation() {
+    public Location getLocation() {
         return location;
+    }
+
+    public String getLocationDisplayName() {
+        return location != null ? location.getDisplay_name() : null;
     }
 
     public String getFormattedRelativeTime() {
@@ -44,9 +49,9 @@ public class Job {
 
     public String getLocality() {
         return locality;
-    }
+         }
 
-    // Setters (for flexibility)
+    // Setters
     public void setId(String id) {
         this.id = id;
     }
@@ -55,7 +60,7 @@ public class Job {
         this.title = title;
     }
 
-    public void setLocation(String location) {
+    public void setLocation(Location location) {
         this.location = location;
     }
 

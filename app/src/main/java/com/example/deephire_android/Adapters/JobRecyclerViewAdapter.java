@@ -7,13 +7,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.deephire_android.Models.Job;
 import com.example.deephire_android.R;
-
 import com.google.android.material.button.MaterialButton;
+
 import java.util.List;
 
 public class JobRecyclerViewAdapter extends RecyclerView.Adapter<JobRecyclerViewAdapter.JobViewHolder> {
@@ -40,7 +41,7 @@ public class JobRecyclerViewAdapter extends RecyclerView.Adapter<JobRecyclerView
         // Bind job data to views
         holder.tvJobTitle.setText(job.getTitle() != null ? job.getTitle() : "N/A");
         holder.tvLocality.setText(job.getLocality() != null ? job.getLocality() : "N/A");
-        holder.tvLocation.setText(job.getLocation() != null ? job.getLocation() : "N/A");
+        holder.tvLocation.setText(job.getLocationDisplayName() != null ? job.getLocationDisplayName() : "N/A");
         holder.tvFormattedRelativeTime.setText(job.getFormattedRelativeTime() != null ? job.getFormattedRelativeTime() : "N/A");
 
         // Accessibility descriptions
@@ -49,7 +50,8 @@ public class JobRecyclerViewAdapter extends RecyclerView.Adapter<JobRecyclerView
 
         // GPS Button: Open location in GPS app
         holder.btnOpenGps.setOnClickListener(v -> {
-            String location = (job.getLocality() != null ? job.getLocality() : "") + ", " + (job.getLocation() != null ? job.getLocation() : "");
+            String location = (job.getLocality() != null ? job.getLocality() : "") + ", " +
+                    (job.getLocationDisplayName() != null ? job.getLocationDisplayName() : "");
             if (!location.trim().isEmpty()) {
                 Uri geoUri = Uri.parse("geo:0,0?q=" + Uri.encode(location.trim()));
                 Intent intent = new Intent(Intent.ACTION_VIEW, geoUri);
@@ -57,7 +59,7 @@ public class JobRecyclerViewAdapter extends RecyclerView.Adapter<JobRecyclerView
                 try {
                     context.startActivity(intent);
                 } catch (Exception e) {
-
+                    // Fallback to default map app if Google Maps is not available
                     context.startActivity(new Intent(Intent.ACTION_VIEW, geoUri));
                 }
             }

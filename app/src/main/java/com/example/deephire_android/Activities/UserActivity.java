@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.deephire_android.Adapters.JobRecyclerViewAdapter;
 import com.example.deephire_android.ApiService.JobApiService;
 import com.example.deephire_android.Models.Job;
+import com.example.deephire_android.Models.Location;
 import com.example.deephire_android.R;
 import com.example.deephire_android.Response.JobSearchResponse;
 import com.example.deephire_android.RetrofitClient.jobRetrofitClient;
@@ -104,7 +105,7 @@ public class UserActivity extends AppCompatActivity {
                         Job job = new Job(
                                 adzunaJob.getId(),
                                 adzunaJob.getTitle(),
-                                adzunaJob.getLocation(),
+                                adzunaJob.getLocation(), // Properly handles Location object
                                 relativeTime,
                                 adzunaJob.getLink(),
                                 adzunaJob.getLocality()
@@ -139,17 +140,7 @@ public class UserActivity extends AppCompatActivity {
                     }
 
                     // Fallback to mock data
-                    List<Job> mockJobs = new ArrayList<>();
-                    for (int i = 1; i <= 5; i++) {
-                        mockJobs.add(new Job(
-                                "mock_job_" + i,
-                                "Mock Job " + i,
-                                "Mock City " + i,
-                                i + " days ago",
-                                "https://example.com/mock_job_" + i,
-                                "us"
-                        ));
-                    }
+                    List<Job> mockJobs = createMockJobs();
                     JobRecyclerViewAdapter adapter = new JobRecyclerViewAdapter(mockJobs, UserActivity.this);
                     recyclerView.setAdapter(adapter);
                     Log.d("API_ERROR", "Using mock data");
@@ -169,22 +160,30 @@ public class UserActivity extends AppCompatActivity {
                 }
 
                 // Fallback to mock data
-                List<Job> mockJobs = new ArrayList<>();
-                for (int i = 1; i <= 5; i++) {
-                    mockJobs.add(new Job(
-                            "mock_job_" + i,
-                            "Mock Job " + i,
-                            "Mock City " + i,
-                            i + " days ago",
-                            "https://example.com/mock_job_" + i,
-                            "us"
-                    ));
-                }
+                List<Job> mockJobs = createMockJobs();
                 JobRecyclerViewAdapter adapter = new JobRecyclerViewAdapter(mockJobs, UserActivity.this);
                 recyclerView.setAdapter(adapter);
                 Log.d("API_ERROR", "Using mock data");
             }
         });
+    }
+
+    private List<Job> createMockJobs() {
+        List<Job> mockJobs = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            Location mockLocation = new Location();
+            mockLocation.setDisplay_name("Mock City " + i);
+
+            mockJobs.add(new Job(
+                    "mock_job_" + i,
+                    "Mock Job " + i,
+                    mockLocation,
+                    i + " days ago",
+                    "https://example.com/mock_job_" + i,
+                    "us"
+            ));
+        }
+        return mockJobs;
     }
 
     private String convertToRelativeTime(String created) {
@@ -221,6 +220,7 @@ public class UserActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        Intent intent;
         if (id == R.id.menu_profile) {
             Log.d("UserActivity", "Profile menu selected");
             return true;
@@ -228,7 +228,14 @@ public class UserActivity extends AppCompatActivity {
             Log.d("UserActivity", "Logout selected, finishing activity");
             finish();
             return true;
+        } else if (id == R.id.search) {
+            intent = new Intent(this, PeopleSearchActivity.class);
+            intent.putExtra("email", tvEmail.getText().toString());
+        } else {
+            intent = new Intent(this, PeopleSearchActivity.class);
         }
+
+        startActivity(intent);
         return super.onOptionsItemSelected(item);
     }
 
