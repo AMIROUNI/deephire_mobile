@@ -107,7 +107,7 @@ public class UserActivity extends AppCompatActivity {
                                 adzunaJob.getTitle(),
                                 adzunaJob.getLocation(), // Properly handles Location object
                                 relativeTime,
-                                adzunaJob.getLink(),
+                                adzunaJob.getLink() == null? "https://www.linkedin.com/": adzunaJob.getLink(),
                                 adzunaJob.getLocality()
                         );
                         jobs.add(job);

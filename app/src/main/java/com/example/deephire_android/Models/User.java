@@ -18,7 +18,7 @@ public class User {
     private boolean isFirstLogin;
     private String companyId;
 
-    // No-argument constructor for Firestore deserialization
+
     public User() {
         this.fullName = "";
         this.email = "";

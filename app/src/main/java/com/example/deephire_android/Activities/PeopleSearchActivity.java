@@ -25,7 +25,7 @@ import java.util.Set;
 
 public class PeopleSearchActivity extends AppCompatActivity {
 
-    private String email;
+    private String Myemail;
     private List<Profile> profiles;
     private Toolbar toolbar;
     private Chip chipProfile;
@@ -41,30 +41,29 @@ public class PeopleSearchActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_people_search);
 
-        // Initialize views
         chipProfile = findViewById(R.id.chipProfile);
         autoCompleteSearch = findViewById(R.id.autoCompleteSearch);
         toolbar = findViewById(R.id.toolbar);
         listViewPeople = findViewById(R.id.listViewPeople);
 
-        // Set up toolbar
+
         setSupportActionBar(toolbar);
 
         // Get email from intent
         Intent intent = getIntent();
-        email = intent.getStringExtra("email");
-        if (email == null || email.isEmpty()) {
+        Myemail = intent.getStringExtra("email");
+        if (Myemail == null || Myemail.isEmpty()) {
             Toast.makeText(this, "Error: No email provided", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
 
-        // Set email in profile chip
-        chipProfile.setText(email);
+
+        chipProfile.setText(Myemail);
 
         // Initialize adapters
         specialtiesAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
+                 android.R.layout.simple_dropdown_item_1line, new ArrayList<>());
         autoCompleteSearch.setAdapter(specialtiesAdapter);
 
         // Changed profilesAdapter to use String instead of Profile
@@ -79,6 +78,17 @@ public class PeopleSearchActivity extends AppCompatActivity {
         autoCompleteSearch.setOnItemClickListener((parent, view, position, id) -> {
             String selectedSpecialty = (String) parent.getItemAtPosition(position);
             filterProfilesBySpecialty(selectedSpecialty);
+        });
+
+
+
+        listViewPeople.setOnItemClickListener((parent, view, position, id) -> {
+            String selectedProfile = (String) parent.getItemAtPosition(position);
+            String email = selectedProfile.split(" - ")[0];
+            Intent intent1 = new Intent(PeopleSearchActivity.this, ProfileDetailActivity.class);
+            intent1.putExtra("email", email);
+            intent1.putExtra("Myemail",Myemail);
+            startActivity(intent1);
         });
     }
 
