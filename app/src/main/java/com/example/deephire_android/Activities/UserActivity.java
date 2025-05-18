@@ -223,7 +223,8 @@ public class UserActivity extends AppCompatActivity {
         Intent intent;
         if (id == R.id.menu_profile) {
             Log.d("UserActivity", "Profile menu selected");
-            return true;
+            intent = new Intent(this,ProfileDetailActivity.class);
+            intent.putExtra("email", tvEmail.getText().toString());
         } else if (id == R.id.menu_logout) {
             Log.d("UserActivity", "Logout selected, finishing activity");
             finish();

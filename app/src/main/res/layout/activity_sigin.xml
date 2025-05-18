@@ -7,59 +7,105 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="24dp"
-    android:background="#FFFFFF"
+    android:background="#121212"
     tools:context=".Activities.SigInActivity">
 
-    <!-- Sign In Title -->
+    <!-- DeepHire Logo -->
     <TextView
-        android:id="@+id/tvTitle"
+        android:id="@+id/tvLogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign In"
-        android:textSize="28sp"
+        android:layout_marginTop="40dp"
+        android:text="DeepHire"
+        android:textColor="#0077B5"
+        android:textSize="32sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="60dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- Email Input -->
-    <EditText
-        android:id="@+id/etEmail"
+    <!-- Title -->
+    <TextView
+        android:id="@+id/tvSignupTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Welcome Back"
+        android:textColor="#E0E0E0"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvLogo" />
+
+    <!-- Email -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/emailContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:backgroundTint="#3F51B5"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
-        app:layout_constraintStart_toStartOf="parent"
+        app:boxStrokeColor="#0077B5"
+        app:hintTextColor="#9E9E9E"
+        app:boxBackgroundColor="#1E1E1E"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="32dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvSignupTitle">
 
-    <!-- Password Input -->
-    <EditText
-        android:id="@+id/etPassword"
+        <EditText
+            android:id="@+id/etEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:textColor="#E0E0E0" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Password -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/passwordContainer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:hint="Password"
-        android:inputType="textPassword"
-        android:backgroundTint="#3F51B5"
-        app:layout_constraintTop_toBottomOf="@id/etEmail"
-        app:layout_constraintStart_toStartOf="parent"
+        app:boxStrokeColor="#0077B5"
+        app:hintTextColor="#9E9E9E"
+        app:boxBackgroundColor="#1E1E1E"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emailContainer">
+
+        <EditText
+            android:id="@+id/etPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="#E0E0E0" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <!-- Sign In Button -->
     <Button
         android:id="@+id/btnSignIn"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="#0077B5"
         android:text="Sign In"
+        android:textAllCaps="false"
         android:textColor="#FFFFFF"
-        android:backgroundTint="#3F51B5"
-        app:layout_constraintTop_toBottomOf="@id/etPassword"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="24dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordContainer" />
+
+    <!-- Don't have an account? -->
+    <TextView
+        android:id="@+id/tvLoginPrompt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Don't have an account? Sign up"
+        android:textColor="#0077B5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnSignIn" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

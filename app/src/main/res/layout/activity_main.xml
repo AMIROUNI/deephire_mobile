@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="#121212"
     tools:context=".Activities.OnboardingActivity">
 
     <!-- App Logo -->
@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Find Your Perfect Match"
-        android:textColor="#3F51B5"
+        android:textColor="#0077B5"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,13 +49,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
-
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Advanced candidate search filters"
-            android:textColor="#333333"
+            android:textColor="#E0E0E0"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -73,13 +71,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/service1">
 
-
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Record and share video interviews"
-            android:textColor="#333333"
+            android:textColor="#E0E0E0"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -97,12 +93,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/service2">
 
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Complete hiring toolkit in one platform"
-            android:textColor="#333333"
+            android:textColor="#E0E0E0"
             android:textSize="16sp" />
     </LinearLayout>
 
@@ -126,7 +121,8 @@
             android:layout_weight="1"
             android:text="Sign In"
             android:textAllCaps="false"
-            android:textColor="#3F51B5" />
+            android:textColor="#0077B5"
+            android:background="?attr/selectableItemBackgroundBorderless" />
 
         <Button
             android:id="@+id/btnGetStarted"
@@ -134,7 +130,7 @@
             android:layout_height="48dp"
             android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:backgroundTint="#3F51B5"
+            android:backgroundTint="#0077B5"
             android:text="Get Started"
             android:textAllCaps="false"
             android:textColor="#FFFFFF" />

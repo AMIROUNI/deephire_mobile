@@ -6,7 +6,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_background"
+    android:background="#121212"
     tools:context=".Activities.UserActivity">
 
     <!-- DeepHire Toolbar -->
@@ -14,13 +14,13 @@
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/dark_surface"
+        android:background="#1E1E1E"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="DeepHire"
-        app:titleTextColor="@color/deephire_blue" />
+        app:titleTextColor="#0077B5" />
 
     <!-- User Profile Chip -->
     <com.google.android.material.chip.Chip
@@ -30,10 +30,10 @@
         android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
         android:text="user@example.com"
-        android:textColor="@color/white"
-        app:chipBackgroundColor="@color/dark_surface_variant"
+        android:textColor="#E0E0E0"
+        app:chipBackgroundColor="#2D2D2D"
         app:chipIcon="@drawable/ic_profile"
-        app:chipIconTint="@color/white"
+        app:chipIconTint="#E0E0E0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar"/>
 
@@ -56,7 +56,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Failed to load jobs"
-        android:textColor="@color/white"
+        android:textColor="#E0E0E0"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,6 +68,7 @@
         android:id="@+id/progressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:indeterminateTint="#0077B5"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

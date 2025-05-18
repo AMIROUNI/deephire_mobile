@@ -6,34 +6,34 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/dark_background"
-    tools:context=".Activities.PeopleSearchActivity">
+    android:background="#121212"
+    tools:context=".Activities.PeopleSearchActivity"
+    android:padding="16dp"> <!-- Added uniform padding around content -->
 
     <!-- DeepHire Toolbar -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/dark_surface"
+        android:background="#1E1E1E"
         android:elevation="4dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:title="People Search"
-        app:titleTextColor="@color/deephire_blue" />
+        app:titleTextColor="#0077B5" />
 
     <!-- User Profile Chip -->
     <com.google.android.material.chip.Chip
         android:id="@+id/chipProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="8dp"
         android:text="user@example.com"
-        android:textColor="@color/white"
-        app:chipBackgroundColor="@color/dark_surface_variant"
+        android:textColor="#E0E0E0"
+        app:chipBackgroundColor="#2D2D2D"
         app:chipIcon="@drawable/ic_profile"
-        app:chipIconTint="@color/white"
+        app:chipIconTint="#E0E0E0"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
@@ -42,12 +42,10 @@
         android:id="@+id/searchInputLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginTop="16dp"
-        app:hintTextColor="@color/deephire_blue"
-        app:boxBackgroundColor="@color/dark_surface"
-        app:boxStrokeColor="@color/deephire_blue"
+        app:hintTextColor="#9E9E9E"
+        app:boxBackgroundColor="#1E1E1E"
+        app:boxStrokeColor="#0077B5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/chipProfile">
@@ -58,8 +56,9 @@
             android:layout_height="wrap_content"
             android:hint="Search by Specialty"
             android:inputType="text"
-            android:textColor="@color/white"
-            android:textColorHint="@color/gray" />
+            android:textColor="#E0E0E0"
+            android:textColorHint="#9E9E9E"
+            android:padding="12dp" /> <!-- Added inner padding -->
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,18 +67,16 @@
         android:id="@+id/listViewPeople"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:background="@color/dark_surface"
-        android:divider="@color/gray"
+        android:background="#1E1E1E"
+        android:divider="#2D2D2D"
         android:dividerHeight="1dp"
         android:padding="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/searchInputLayout"
-        tools:listitem="@android:layout/simple_list_item_1" />
+    app:layout_constraintTop_toBottomOf="@id/searchInputLayout"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    tools:listitem="@android:layout/simple_list_item_1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

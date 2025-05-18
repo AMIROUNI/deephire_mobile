@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp"
-    app:cardBackgroundColor="@color/dark_surface"
+    app:cardBackgroundColor="#1E1E1E"
     app:cardCornerRadius="12dp"
     app:cardElevation="4dp">
 
@@ -24,7 +24,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:text="Job Title"
-            android:textColor="@color/white"
+            android:textColor="#E0E0E0"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -37,7 +37,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Locality"
-            android:textColor="@color/gray_400"
+            android:textColor="#9E9E9E"
             android:textSize="14sp" />
 
         <!-- Location -->
@@ -49,7 +49,7 @@
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Location"
-            android:textColor="@color/gray_400"
+            android:textColor="#9E9E9E"
             android:textSize="14sp" />
 
         <!-- Posted Date -->
@@ -59,7 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="Posted 3 days ago"
-            android:textColor="@color/gray_400"
+            android:textColor="#757575"
             android:textSize="12sp" />
 
         <!-- Button Container -->
@@ -79,13 +79,13 @@
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
                 android:text="Open in GPS"
-                android:textColor="@color/deephire_blue"
+                android:textColor="#0077B5"
                 android:textSize="14sp"
                 app:cornerRadius="8dp"
                 app:icon="@drawable/ic_location"
                 app:iconGravity="start"
-                app:iconTint="@color/deephire_blue"
-                app:strokeColor="@color/deephire_blue" />
+                app:iconTint="#0077B5"
+                app:strokeColor="#0077B5" />
 
             <!-- Browser Button -->
             <com.google.android.material.button.MaterialButton
@@ -95,13 +95,13 @@
                 android:layout_height="48dp"
                 android:layout_weight="1"
                 android:text="View Details"
-                android:textColor="@color/deephire_blue"
+                android:textColor="#0077B5"
                 android:textSize="14sp"
                 app:cornerRadius="8dp"
                 app:icon="@drawable/ic_open_in_new"
                 app:iconGravity="end"
-                app:iconTint="@color/deephire_blue"
-                app:strokeColor="@color/deephire_blue" />
+                app:iconTint="#0077B5"
+                app:strokeColor="#0077B5" />
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>
